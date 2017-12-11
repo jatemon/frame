@@ -10,10 +10,13 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "filp/whoops": "^2.0@dev"
+        "filp/whoops": "^2.0@dev",
+        "gregwar/captcha": "1.*"
     },
     "autoload":{
-        "files":["system/helper.php"],
+        "files":[
+            "system/helper.php"
+        ],
         "psr-4":{
             "houdunwang\\":"houdunwang\\",
             "app\\":"app\\",
