@@ -43,11 +43,15 @@ if ( ! function_exists ( 'u' ) ) {
 	 *
 	 * @param $url    url参数
 	 */
-	function u ( $url )
+	function u ( $url ,$args = [])
 	{
+		//p($args);die;//&id=1&name=hd
+		$args = http_build_query ($args);
+		$args = $args ? '&' . $args  :  $args;
+		//p($args);die;
 		//将$url拆成数组
 		$info = explode ( '/' , $url );
-		//p($info);die;
+		//p($info);die;//id=1&name=hd
 		//p(MODULE);
 		//p(CONTROLLER);
 		//p(ACTION);
@@ -56,13 +60,13 @@ if ( ! function_exists ( 'u' ) ) {
 		//p($url);//index【方法】
 		//以上三个最终都组合成?s=模块/控制器/方法
 		if ( count ( $info ) == 1 ) {
-			$resUrl = "?s=" . MODULE . '/' . CONTROLLER . '/' . $info[ 0 ];
+			$resUrl = "?s=" . MODULE . '/' . CONTROLLER . '/' . $info[ 0 ] .$args;
 		}
 		else if ( count ( $info ) == 2 ) {
-			$resUrl = "?s=" . MODULE . '/' . $info[ 0 ] . '/' . $info[ 1 ];
+			$resUrl = "?s=" . MODULE . '/' . $info[ 0 ] . '/' . $info[ 1 ] .$args;
 		}
 		else {
-			$resUrl = "?s=" . $info[ 0 ] . '/' . $info[ 1 ] . '/' . $info[ 2 ];
+			$resUrl = "?s=" . $info[ 0 ] . '/' . $info[ 1 ] . '/' . $info[ 2 ] .$args;
 		}
 
 		return $resUrl;
@@ -130,4 +134,5 @@ if ( isset( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) && $_SERVER[ 'HTTP_X_REQUESTED
 else {
 	define ( 'IS_AJAX' , false );
 }
+
 

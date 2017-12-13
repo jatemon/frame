@@ -1,8 +1,17 @@
 <?php
-namespace houdunwang\core;			//定义命名空间
-class Boot							//定义类Boot，作用主入口测试
+
+namespace houdunwang\core;
+
+use app\home\controller\Index;
+
+/**
+ * 启动类
+ * Class Boot
+ *
+ * @package houdunwang\core
+ */
+class Boot
 {
-	//声明一个公开静态的run()方法
 	public static function run ()
 	{
 		//处理错误
@@ -25,15 +34,12 @@ class Boot							//定义类Boot，作用主入口测试
 		//执行应用
 		self::appRun();
 	}
-
 	//错误异常处理
 	public static function handler(){
 		$whoops = new \Whoops\Run;
 		$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 		$whoops->register();
 	}
-
-
 	/**
 	 * 运行应用
 	 */
@@ -83,32 +89,19 @@ class Boot							//定义类Boot，作用主入口测试
 		//接下来，我们构建MVC中的C就是controler
 		//接下来在app/home/controller/Index.php文件中进行测试
 	}
-
 	/**
 	 * 初始化框架
 	 */
-	//声明一个公开静态的init()方法
 	public static function init ()
 	{
 		//1.头部
-
-		//设置文档类型
-		//设置字符集
 		header ( 'Content-type:text/html;charset=utf8' );
 		//2.设置时区
-
-		//东8区，可进一步优化，以适应各个时区
 		date_default_timezone_set ( 'PRC' );
 		//3.开启session
 		//如果已经有session_id()说明session开启过了
 		//如果没有session_id，则再开启session
 		//重复开启session，会导致报错
-
-		//短路的快捷写法
-		//session开始时，在服务器上以文件的形式存在，在客户端以cookie的形式存在
-		//cookie中的value值是文件名
 		session_id () || session_start ();
 	}
-
-
 }
